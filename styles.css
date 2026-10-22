@@ -1,42 +1,18 @@
 /* ==========================================================
-   CAFÉ CON ESTILO · HOJA DE ESTILOS
+   CAFÉ CON ESTILO · HOJA DE ESTILOS (diseño de la tarjeta QR)
    1. Colores  2. Base  3. Inicio  4. Encabezado  5. Menú  6. Pie
    ========================================================== */
 
 /* ---------- 1. COLORES ---------- */
 :root {
-  --bg: #fbf5ea;       /* fondo */
-  --card: #fff;        /* tarjetas y fotos */
-  --ink: #3b1d03;      /* texto principal */
-  --mute: #8a6b4f;     /* texto secundario */
-  --acc: #552902;      /* títulos y precios */
-  --tan: #e9b67d;      /* bordes del logo */
-  --line: #ecdcc3;     /* líneas divisorias */
-  --logo-bg: #fff;     /* círculo detrás del logo */
-}
-
-/* Modo oscuro automático (según el teléfono) */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #1c120a;
-    --card: #2a1b10;
-    --ink: #f6ead8;
-    --mute: #c4a77f;
-    --acc: #e9b67d;
-    --line: #3d2918;
-    --logo-bg: #fbf5ea;
-  }
-}
-
-/* Modo oscuro forzado (data-theme="dark" en <html>) */
-:root[data-theme="dark"] {
-  --bg: #1c120a;
-  --card: #2a1b10;
-  --ink: #f6ead8;
-  --mute: #c4a77f;
-  --acc: #e9b67d;
-  --line: #3d2918;
-  --logo-bg: #fbf5ea;
+  --bg: #fff;          /* fondo blanco */
+  --card: #fff;        /* fondo de fotos y botones */
+  --ink: #4b2e22;      /* marrón de la tarjeta: textos y títulos */
+  --mute: #8c7566;     /* texto secundario */
+  --acc: #4b2e22;      /* precios y categoría activa */
+  --tan: #cdb59c;      /* beige de la taza: bordes y detalles */
+  --line: #eadfd3;     /* líneas divisorias */
+  color-scheme: light;
 }
 
 /* ---------- 2. BASE ---------- */
@@ -47,7 +23,7 @@
 html {
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 64px);
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 112px);
   scroll-behavior: smooth;
 }
 
@@ -55,68 +31,72 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "DM Sans", system-ui, sans-serif;
+  font-family: "Jost", system-ui, sans-serif;
 }
 
 h1,
 h2,
 .top b {
-  font-family: "Playfair Display", Georgia, serif;
-  color: var(--acc);
-}
-
-.logo {
-  display: grid;
-  place-items: center;
-  background: var(--logo-bg);
-  border-radius: 50%;
-}
-
-.logo svg {
-  width: 86%;
-  height: 86%;
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  color: var(--ink);
 }
 
 /* ---------- 3. PANTALLA DE INICIO ---------- */
 #splash {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
   min-height: 100vh;
-  padding: 24px;
-  text-align: center;
-}
-
-#splash button {
-  padding: 0;
-  border: 0;
-  background: none;
+  min-height: 100svh;
+  overflow: hidden;
   cursor: pointer;
-  animation: pulso 2.4s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
 }
 
-#splash .logo {
-  width: min(62vw, 260px);
-  aspect-ratio: 1;
-  border: 3px solid var(--tan);
-  box-shadow: 0 12px 40px rgba(85, 41, 2, 0.25);
+/* Ramas de café (posición como en la imagen de bienvenida) */
+.rama {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+}
+#splash .sup-izq { top: 0;     left: 0;  width: min(40vw, 240px); transform: translateX(-35%); }
+#splash .der     { top: 13%;   right: 0; width: min(38vw, 230px); transform: translateX(40%); }
+#splash .inf-izq { bottom: 0;  left: 0;  width: min(44vw, 260px); transform: translate(-28%, 12%); }
+#splash .inf-der { bottom: 8%; right: 0; width: min(30vw, 190px); transform: translateX(45%); }
+
+.centro {
+  position: relative;
+  top: 0svh;            /* más abajo: sube este número para bajarlo más */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: pulso 2.8s ease-in-out infinite;
 }
 
-#splash h1 {
-  margin: 8px 0 0;
-  font-size: 2rem;
-}
 
-.hint {
-  margin: 0;
-  color: var(--mute);
-  font-size: 0.95rem;
+.copa   { width: min(30vw, 300px); }
+.titulo { width: min(69vw, 420px); }
+.lema {
+  margin: min(3.7vw, 22px) 0 0;
+  font-size: clamp(1.05rem, 4.2vw, 1.5rem);
+  font-weight: 400;
+  color: var(--ink);
+}
+.lema b {
+  font-weight: 600;
 }
 
 @keyframes pulso {
-  50% { transform: scale(1.04); }
+  50% { transform: scale(1.03); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .centro { animation: none; }
+  html { scroll-behavior: auto; }
 }
 
 /* ---------- 4. ENCABEZADO Y CATEGORÍAS ---------- */
@@ -136,17 +116,16 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 16px 4px;
+  padding: 10px 16px 2px;
 }
 
-.top .logo {
-  width: 38px;
-  height: 38px;
-  border: 2px solid var(--tan);
+.top img {
+  width: 34px;
+  height: auto;
 }
 
 .top b {
-  font-size: 1.15rem;
+  font-size: 1.4rem;
 }
 
 nav {
@@ -159,8 +138,8 @@ nav {
 
 nav a {
   flex: none;
-  padding: 6px 14px;
-  border: 1px solid var(--line);
+  padding: 6px 16px;
+  border: 1px solid var(--tan);
   border-radius: 99px;
   background: var(--card);
   color: var(--ink);
@@ -175,6 +154,12 @@ nav a.on {
   color: var(--bg);
 }
 
+nav a:focus-visible,
+#splash:focus-visible {
+  outline: 2px solid var(--tan);
+  outline-offset: 3px;
+}
+
 /* ---------- 5. LISTA DE PRODUCTOS ---------- */
 main {
   max-width: 640px;
@@ -183,8 +168,12 @@ main {
 }
 
 h2 {
-  margin: 28px 0 4px;
-  font-size: 1.5rem;
+  margin: 30px 0 4px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--tan);
+  font-size: 2rem;
+  font-style: italic;
+  line-height: 1.1;
 }
 
 .it {
@@ -195,10 +184,8 @@ h2 {
   border-bottom: 1px solid var(--line);
 }
 
-/* Foto del platillo */
+/* Foto del platillo (solo aparece si el platillo tiene foto) */
 .ph {
-  display: grid;
-  place-items: center;
   flex: none;
   width: 76px;
   height: 76px;
@@ -209,14 +196,10 @@ h2 {
 }
 
 .ph img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.ph svg {
-  width: 60%;
-  opacity: 0.25;
 }
 
 /* Nombre, detalle y precio */
@@ -227,7 +210,7 @@ h2 {
 
 .tx strong {
   display: block;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .tx small {
@@ -236,14 +219,25 @@ h2 {
 
 .pr {
   color: var(--acc);
-  font-weight: 700;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 600;
   white-space: nowrap;
 }
 
 /* ---------- 6. PIE DE PÁGINA ---------- */
 footer {
-  padding: 16px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 16px 32px;
   color: var(--mute);
   font-size: 0.8rem;
   text-align: center;
+}
+
+footer img {
+  width: min(46vw, 220px);
+  height: auto;
 }
