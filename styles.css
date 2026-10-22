@@ -241,3 +241,49 @@ footer img {
   width: min(46vw, 220px);
   height: auto;
 }
+
+/* Ajustes para celulares */
+@media screen and (max-width: 600px) {
+  #splash {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #splash .rama {
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  #splash .sup-izq {
+    width: 30vw;
+    max-width: 150px;
+  }
+
+  #splash .der {
+    width: 28vw;
+    max-width: 140px;
+  }
+
+  #splash .inf-izq {
+    width: 32vw;
+    max-width: 160px;
+  }
+
+  #splash .inf-der {
+    width: 23vw;
+    max-width: 120px;
+  }
+
+  #splash .copa {
+    width: min(30vw, 180px);
+  }
+
+  #splash .titulo {
+    width: min(69vw, 320px);
+    max-width: 100%;
+  }
+}
