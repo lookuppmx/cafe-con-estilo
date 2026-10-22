@@ -1,0 +1,249 @@
+/* ==========================================================
+   CAFÉ CON ESTILO · HOJA DE ESTILOS
+   1. Colores  2. Base  3. Inicio  4. Encabezado  5. Menú  6. Pie
+   ========================================================== */
+
+/* ---------- 1. COLORES ---------- */
+:root {
+  --bg: #fbf5ea;       /* fondo */
+  --card: #fff;        /* tarjetas y fotos */
+  --ink: #3b1d03;      /* texto principal */
+  --mute: #8a6b4f;     /* texto secundario */
+  --acc: #552902;      /* títulos y precios */
+  --tan: #e9b67d;      /* bordes del logo */
+  --line: #ecdcc3;     /* líneas divisorias */
+  --logo-bg: #fff;     /* círculo detrás del logo */
+}
+
+/* Modo oscuro automático (según el teléfono) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c120a;
+    --card: #2a1b10;
+    --ink: #f6ead8;
+    --mute: #c4a77f;
+    --acc: #e9b67d;
+    --line: #3d2918;
+    --logo-bg: #fbf5ea;
+  }
+}
+
+/* Modo oscuro forzado (data-theme="dark" en <html>) */
+:root[data-theme="dark"] {
+  --bg: #1c120a;
+  --card: #2a1b10;
+  --ink: #f6ead8;
+  --mute: #c4a77f;
+  --acc: #e9b67d;
+  --line: #3d2918;
+  --logo-bg: #fbf5ea;
+}
+
+/* ---------- 2. BASE ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 64px);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "DM Sans", system-ui, sans-serif;
+}
+
+h1,
+h2,
+.top b {
+  font-family: "Playfair Display", Georgia, serif;
+  color: var(--acc);
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  background: var(--logo-bg);
+  border-radius: 50%;
+}
+
+.logo svg {
+  width: 86%;
+  height: 86%;
+}
+
+/* ---------- 3. PANTALLA DE INICIO ---------- */
+#splash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+#splash button {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  animation: pulso 2.4s ease-in-out infinite;
+}
+
+#splash .logo {
+  width: min(62vw, 260px);
+  aspect-ratio: 1;
+  border: 3px solid var(--tan);
+  box-shadow: 0 12px 40px rgba(85, 41, 2, 0.25);
+}
+
+#splash h1 {
+  margin: 8px 0 0;
+  font-size: 2rem;
+}
+
+.hint {
+  margin: 0;
+  color: var(--mute);
+  font-size: 0.95rem;
+}
+
+@keyframes pulso {
+  50% { transform: scale(1.04); }
+}
+
+/* ---------- 4. ENCABEZADO Y CATEGORÍAS ---------- */
+#menu {
+  display: none;
+}
+
+header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 4px;
+}
+
+.top .logo {
+  width: 38px;
+  height: 38px;
+  border: 2px solid var(--tan);
+}
+
+.top b {
+  font-size: 1.15rem;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  padding: 6px 16px 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+nav a {
+  flex: none;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+nav a.on {
+  background: var(--acc);
+  border-color: var(--acc);
+  color: var(--bg);
+}
+
+/* ---------- 5. LISTA DE PRODUCTOS ---------- */
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 8px 16px 40px;
+}
+
+h2 {
+  margin: 28px 0 4px;
+  font-size: 1.5rem;
+}
+
+.it {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Foto del platillo */
+.ph {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 76px;
+  height: 76px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ph svg {
+  width: 60%;
+  opacity: 0.25;
+}
+
+/* Nombre, detalle y precio */
+.tx {
+  flex: 1;
+  min-width: 0;
+}
+
+.tx strong {
+  display: block;
+  font-weight: 700;
+}
+
+.tx small {
+  color: var(--mute);
+}
+
+.pr {
+  color: var(--acc);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ---------- 6. PIE DE PÁGINA ---------- */
+footer {
+  padding: 16px 16px 32px;
+  color: var(--mute);
+  font-size: 0.8rem;
+  text-align: center;
+}

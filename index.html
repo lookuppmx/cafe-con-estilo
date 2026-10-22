@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Café con Estilo · Menú</title>
+
+  <!-- Tipografías -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Logo (se define una sola vez y se reutiliza con <use href="#logo">) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="logo" viewBox="0 0 320 320">
+      <g transform="matrix(1.687627,0,0,1.687627,8.318094,6.293021)" style="fill-rule:evenodd;clip-rule:evenodd">
+        <path fill="rgb(233,182,125)" d="M111.445,109.846C122.975,111.115 124.537,109.709 124.557,112.496C124.984,174.089 50.884,174.142 43.294,126.532C42.228,119.844 40.863,116.283 51.739,108.872C69.909,96.489 93.284,105.561 111.445,109.846Z"/>
+        <path fill="rgb(85,41,2)" d="M86.438,98.862C85.546,98.776 70.25,95.833 57.475,101.447C45.037,106.914 42.416,115.103 42.318,110.555C41.643,79.158 41.882,77.81 44.515,77.667C72.214,76.161 134.661,77.487 142.498,77.653C144.015,77.685 156.9,77.959 158.015,88.555C160.3,110.251 131.279,105.506 126.504,105.662C105.956,106.331 106.377,103.508 86.438,98.862Z"/>
+        <path fill="rgb(85,41,3)" d="M68.507,163.923C134.352,163.138 146.135,166.855 146.582,167.441C152.135,174.726 31.721,173.575 22.618,169.282C13.893,165.166 64.812,164.007 68.507,163.923Z"/>
+        <path fill="rgb(248,244,173)" d="M77.209,13.672C84.409,36.186 116.08,49.445 102.286,66.344C101.828,66.906 93.651,76.924 94.847,71.528C99.84,48.987 64.787,37.68 75.264,14.276C75.33,14.128 76.089,12.433 76.5,12.666C76.857,12.868 76.852,13.469 77.209,13.672Z"/>
+        <path fill="rgb(253,253,252)" d="M142.511,96.911C132.066,98.437 128.865,105.173 129.164,99.525C130.731,69.845 157.577,81.597 151.015,93.243C148.333,98.003 142.839,96.9 142.511,96.911Z"/>
+        <path fill="rgb(247,244,173)" d="M82.719,74.442C82.219,56.923 67.394,58.829 67.608,39.531C67.647,36.015 69.319,39.606 77.243,47.766C79.18,49.76 94.881,62.398 85.146,74.184C85.022,74.335 84.843,74.551 82.719,74.442Z"/>
+        <path fill="rgb(249,246,243)" d="M84.501,82.877C81.767,82.86 37.015,82.589 50.42,80.375C53.659,79.841 116.285,79.404 117.308,80.653C118.975,82.687 116.23,82.622 84.501,82.877Z"/>
+        <path fill="rgb(246,245,176)" d="M86.269,15.61C86.123,15.207 83.099,6.861 86.593,10.264C97.379,20.773 96.159,24.235 95.686,25.579C94.186,29.835 93.092,25.424 86.269,15.61Z"/>
+        <path fill="rgb(247,245,177)" d="M68.598,69.452C64.831,63.162 63.326,63.283 61.958,59.365C57.559,46.767 77.183,68.478 71.052,73.031C68.726,74.759 69.576,72.303 68.598,69.452Z"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- Pantalla de inicio -->
+  <section id="splash">
+    <button id="open" type="button" aria-label="Abrir menú">
+      <div class="logo"><svg><use href="#logo"/></svg></div>
+    </button>
+    <h1>Café con Estilo</h1>
+    <p class="hint">Toca el logo para ver el menú</p>
+  </section>
+
+  <!-- Menú -->
+  <div id="menu">
+    <header>
+      <div class="top">
+        <div class="logo"><svg><use href="#logo"/></svg></div>
+        <b>Café con Estilo</b>
+      </div>
+      <nav id="nav"></nav>
+    </header>
+
+    <main id="list"></main>
+
+    <footer>Trabajado por LookUpp.mx</footer>
+  </div>
+
+  <script>
+    /* ==========================================================
+       DATOS DEL MENÚ
+       - Para cambiar el orden, mueve el bloque completo de una categoría.
+       - Para agregar foto a un platillo, pon la ruta en "foto",
+         por ejemplo: foto: "fotos/latte.jpg"
+       ========================================================== */
+    const MENU = [
+      {
+        nombre: "Bebidas calientes", id: "calientes",
+        items: [
+          { nombre: "Mocha caliente",      detalle: "12 oz", precio: 110, foto: "" },
+          { nombre: "Chocolate caliente",  detalle: "12 oz", precio: 99,  foto: "" },
+          { nombre: "Americano caliente",  detalle: "12 oz", precio: 80,  foto: "" },
+          { nombre: "Tisana caliente",     detalle: "12 oz", precio: 99,  foto: "" },
+          { nombre: "Té caliente",         detalle: "12 oz", precio: 90,  foto: "" },
+          { nombre: "Espresso caliente",   detalle: "12 oz", precio: 60,  foto: "" },
+          { nombre: "Cappuccino caliente", detalle: "12 oz", precio: 99,  foto: "" },
+          { nombre: "Chai caliente",       detalle: "12 oz", precio: 90,  foto: "" },
+          { nombre: "Latte caliente",      detalle: "12 oz", precio: 95,  foto: "" }
+        ]
+      },
+      {
+        nombre: "Bebidas frías", id: "frias",
+        items: [
+          { nombre: "Refresco",          detalle: "600 ml", precio: 52,  foto: "" },
+          { nombre: "Agua",              detalle: "600 ml", precio: 31,  foto: "" },
+          { nombre: "Té frío",           detalle: "16 oz",  precio: 99,  foto: "" },
+          { nombre: "Tisana fría",       detalle: "16 oz",  precio: 105, foto: "" },
+          { nombre: "Soda italiana",     detalle: "16 oz",  precio: 99,  foto: "" },
+          { nombre: "Chocolate frío",    detalle: "16 oz",  precio: 105, foto: "" },
+          { nombre: "Latte frío",        detalle: "16 oz",  precio: 118, foto: "" },
+          { nombre: "Chai frío",         detalle: "16 oz",  precio: 135, foto: "" },
+          { nombre: "Mocha frío",        detalle: "16 oz",  precio: 125, foto: "" },
+          { nombre: "Smoothie (agua)",   detalle: "16 oz",  precio: 125, foto: "" },
+          { nombre: "Smoothie (leche)",  detalle: "16 oz",  precio: 135, foto: "" }
+        ]
+      },
+      {
+        nombre: "Frappés", id: "frappes",
+        items: [
+          { nombre: "Frappé original",        detalle: "16 oz", precio: 125, foto: "" },
+          { nombre: "Frappé moka",            detalle: "16 oz", precio: 125, foto: "" },
+          { nombre: "Frappé Oreo",            detalle: "16 oz", precio: 125, foto: "" },
+          { nombre: "Frappé vainilla",        detalle: "16 oz", precio: 125, foto: "" },
+          { nombre: "Frappé caramelo",        detalle: "16 oz", precio: 125, foto: "" },
+          { nombre: "Frappé especias vainilla", detalle: "16 oz", precio: 125, foto: "" },
+          { nombre: "Frappé chai especias",   detalle: "16 oz", precio: 125, foto: "" },
+          { nombre: "Frappé chai vainilla",   detalle: "16 oz", precio: 125, foto: "" },
+          { nombre: "Frappé matcha",          detalle: "16 oz", precio: 135, foto: "" }
+        ]
+      },
+      {
+        nombre: "Desayunos", id: "desayunos",
+        items: [
+          { nombre: "Chilaquiles verdes con pollo", detalle: "Totopos con salsa verde", precio: 160, foto: "" },
+          { nombre: "Chilaquiles rojos con pollo",  detalle: "Totopos con salsa roja",  precio: 160, foto: "" }
+        ]
+      },
+      {
+        nombre: "Sándwiches y tortas", id: "sandwiches",
+        items: [
+          { nombre: "Sándwich de jamón", detalle: "", precio: 127, foto: "" },
+          { nombre: "Baguette de jamón", detalle: "", precio: 140, foto: "" },
+          { nombre: "Cuernito de jamón", detalle: "", precio: 130, foto: "" },
+          { nombre: "Torta de jamón",    detalle: "Jamón, lechuga, tomate, aguacate, crema y mostaza", precio: 130, foto: "" },
+          { nombre: "Torta de pierna",   detalle: "", precio: 160, foto: "" }
+        ]
+      },
+      {
+        nombre: "Postres", id: "postres",
+        items: [
+          { nombre: "Rebanada de cheesecake", detalle: "1 rebanada", precio: 99, foto: "" },
+          { nombre: "Rebanada de panqué",     detalle: "1 rebanada", precio: 55, foto: "" }
+        ]
+      }
+    ];
+
+    /* ==========================================================
+       CÓDIGO (normalmente no hace falta editarlo)
+       ========================================================== */
+    const splash = document.getElementById("splash");
+    const menu   = document.getElementById("menu");
+    const nav    = document.getElementById("nav");
+    const list   = document.getElementById("list");
+
+    const placeholder = '<svg viewBox="0 0 320 320"><use href="#logo"/></svg>';
+
+    function crearItem(item) {
+      const imagen = item.foto
+        ? `<img loading="lazy" alt="${item.nombre}" src="${item.foto}">`
+        : placeholder;
+      const detalle = item.detalle ? `<small>${item.detalle}</small>` : "";
+      return `
+        <div class="it">
+          <div class="ph">${imagen}</div>
+          <div class="tx"><strong>${item.nombre}</strong>${detalle}</div>
+          <div class="pr">$${item.precio}</div>
+        </div>`;
+    }
+
+    MENU.forEach(function (cat) {
+      const link = document.createElement("a");
+      link.href = "#" + cat.id;
+      link.textContent = cat.nombre;
+      link.dataset.id = cat.id;
+      nav.appendChild(link);
+
+      const seccion = document.createElement("section");
+      seccion.id = cat.id;
+      seccion.innerHTML = `<h2>${cat.nombre}</h2>` + cat.items.map(crearItem).join("");
+      list.appendChild(seccion);
+    });
+
+    const links = nav.querySelectorAll("a");
+
+    function marcarCategoriaActiva() {
+      const y = window.scrollY + 120;
+      let actual = MENU[0].id;
+      MENU.forEach(function (cat) {
+        if (document.getElementById(cat.id).offsetTop <= y) actual = cat.id;
+      });
+      links.forEach(function (link) {
+        const activo = link.dataset.id === actual;
+        link.classList.toggle("on", activo);
+        if (activo && menu.style.display === "block") {
+          nav.scrollTo({ left: link.offsetLeft - 16, behavior: "smooth" });
+        }
+      });
+    }
+
+    document.getElementById("open").onclick = function () {
+      splash.style.display = "none";
+      menu.style.display = "block";
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener("scroll", marcarCategoriaActiva);
+    marcarCategoriaActiva();
+  </script>
+
+</body>
+</html>
